@@ -48,14 +48,6 @@
   
   <xsl:template match="/">
     
-    <xsl:variable name="cns" as="node()*">
-      <xsl:apply-templates select="//kb:criticalNote" mode="pre"></xsl:apply-templates>
-    </xsl:variable>
-    
-    <xsl:variable name="witnesses">
-      <xsl:apply-templates select="$cns" mode="pre2"></xsl:apply-templates>
-    </xsl:variable>
-    
     <xsl:text>graph G {</xsl:text>
     
     <!-- size -->
