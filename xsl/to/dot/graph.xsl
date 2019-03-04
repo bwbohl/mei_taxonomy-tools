@@ -85,7 +85,7 @@
       <xsl:text> </xsl:text>
       <xsl:text>[</xsl:text>
       <xsl:text>label = "</xsl:text>
-      <xsl:value-of select="$node/mei:label[@xml:lang = $lang]"/>
+      <xsl:value-of select="if(local-name($node) = 'taxonomy') then($node/mei:head[@xml:lang = $lang]) else($node/mei:label[@xml:lang = $lang])"/>
       <xsl:text>"</xsl:text>
       <xsl:text>]</xsl:text>
       <xsl:text>;</xsl:text>
