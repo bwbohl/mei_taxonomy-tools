@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-  xmlns:fo="http://www.w3.org/1999/XSL/Format"
-  xmlns:mei="http://www.music-encoding.org/ns/mei"
-  exclude-result-prefixes="xs xd"
-  version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:mei="http://www.music-encoding.org/ns/mei" exclude-result-prefixes="xs xd" version="2.0">
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p><xd:b>Created on:</xd:b> Apr 8, 2019</xd:p>
       <xd:p><xd:b>Author:</xd:b> bwb</xd:p>
-      <xd:p></xd:p>
+      <xd:p/>
     </xd:desc>
   </xd:doc>
-  
   <xsl:output indent="yes"/>
   
+  <xsl:param name="lang">de</xsl:param>
   <xsl:param name="image-url"></xsl:param>
+  
+  <xsl:template match="*[@xml:lang != $lang]"/>
+  
   <xsl:template match="/">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
       <fo:layout-master-set>
@@ -30,8 +27,6 @@
       <fo:page-sequence master-reference="A4-portrait">
         <fo:flow flow-name="xsl-region-body" font="12pt Times">
           <xsl:apply-templates/>
-          
-          
           <!--<fo:block font="italic 14pt Helvetica">
             <fo:inline color="red">Hello</fo:inline> <fo:inline color="blue">World</fo:inline></fo:block>
           <fo:block> Attributes: <fo:inline color="green">colored</fo:inline>, <fo:inline
@@ -57,20 +52,24 @@
   </xsl:template>
   
   <xsl:template match="mei:taxonomy">
-    <fo:block font-weight="bold" font-size="16pt" span="all">
-      <xsl:value-of select="mei:head[@xml:lang = 'de']"/>
+    <fo:block>
+      <fo:block font-weight="bold" font-size="16pt" space-before="6pt" span="all">
+        <xsl:value-of select="mei:head[@xml:lang = $lang]"/>
+      </fo:block>
+      <fo:block>
+        <xsl:apply-templates select="mei:desc[@xml:lang = $lang]"/>
+        <xsl:apply-templates select="mei:category"/>
+      </fo:block>
     </fo:block>
-    <xsl:apply-templates/>
-    
   </xsl:template>
   
   <xsl:template match="mei:category[parent::mei:taxonomy]">
     <fo:block>
       <fo:block font-weight="bold" font-size="14pt" space-before="6pt">
-        <xsl:value-of select="mei:label[@xml:lang = 'de']"/>
+        <xsl:value-of select="mei:label[@xml:lang = $lang]"/>
       </fo:block>
       <fo:block>
-        <xsl:apply-templates select="mei:desc[@xml:lang = 'de']"/>
+        <xsl:apply-templates select="mei:desc[@xml:lang = $lang]"/>
         <xsl:apply-templates select="mei:category"/>
       </fo:block>
     </fo:block>
@@ -79,12 +78,13 @@
   <xsl:template match="mei:category[parent::mei:category]">
     <fo:block>
       <fo:block font-weight="bold" font-size="12pt" space-before="6pt">
-        <xsl:value-of select="mei:label[@xml:lang = 'de']"/>
+        <xsl:value-of select="mei:label[@xml:lang = $lang]"/>
       </fo:block>
       <fo:block>
-        <xsl:apply-templates select="mei:desc[@xml:lang = 'de']"/>
+        <xsl:apply-templates select="mei:desc[@xml:lang = $lang]"/>
         <xsl:apply-templates select="mei:category"/>
       </fo:block>
     </fo:block>
   </xsl:template>
+  
 </xsl:stylesheet>
