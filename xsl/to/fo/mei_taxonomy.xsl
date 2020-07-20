@@ -16,6 +16,7 @@
   
   <xsl:output indent="yes"/>
   
+  <xsl:param name="image-url"></xsl:param>
   <xsl:template match="/">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
       <fo:layout-master-set>
@@ -48,7 +49,7 @@
       <fo:page-sequence master-reference="A3-landscape">
         <fo:flow flow-name="xsl-region-body">
           <fo:block break-before="page" span="all">
-            <fo:external-graphic src="dist/bazga.annotation_5cbaf39.png" max-width="100%" max-height="100%" scaling="uniform" content-width="80%" margin-left="auto" margin-right="auto"/>
+            <fo:external-graphic src="{$image-url}" max-width="100%" max-height="100%" scaling="uniform" content-width="80%" margin-left="auto" margin-right="auto"/>
           </fo:block>
         </fo:flow>
       </fo:page-sequence>
