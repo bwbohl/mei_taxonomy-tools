@@ -12,7 +12,9 @@
   <xsl:param name="lang">de</xsl:param>
   <xsl:param name="image-url"></xsl:param>
   
-  <xsl:template match="*[@xml:lang != $lang]"/>
+  <xsl:variable name="levels" select="max(for $i in //mei:category return count($i/ancestor-or-self::mei:category))"/>
+  
+  <xsl:template match="*[@xml:lang != $lang]"/> 
   
   <xsl:template match="/">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
@@ -25,7 +27,7 @@
         </fo:simple-page-master>
       </fo:layout-master-set>
       <fo:page-sequence master-reference="A4-portrait">
-        <fo:flow flow-name="xsl-region-body" font="12pt Times">
+        <fo:flow flow-name="xsl-region-body" font="12pt Times" line-height="20pt">
           <xsl:apply-templates/>
           <!--<fo:block font="italic 14pt Helvetica">
             <fo:inline color="red">Hello</fo:inline> <fo:inline color="blue">World</fo:inline></fo:block>
@@ -44,7 +46,7 @@
       <fo:page-sequence master-reference="A3-landscape">
         <fo:flow flow-name="xsl-region-body">
           <fo:block break-before="page" span="all">
-            <fo:external-graphic src="{$image-url}" max-width="100%" max-height="100%" scaling="uniform" content-width="80%" margin-left="auto" margin-right="auto"/>
+            <fo:external-graphic src="{$image-url}" max-width="80%" max-height="80%" scaling="uniform" content-height="scale-to-fit" margin-left="auto" margin-right="auto"/>
           </fo:block>
         </fo:flow>
       </fo:page-sequence>
@@ -53,7 +55,7 @@
   
   <xsl:template match="mei:taxonomy">
     <fo:block>
-      <fo:block font-weight="bold" font-size="16pt" space-before="6pt" span="all">
+      <fo:block font-weight="bold" font-size="16pt" space-before="16pt" space-after="8pt" span="all">
         <xsl:value-of select="mei:head[@xml:lang = $lang]"/>
       </fo:block>
       <fo:block>
@@ -65,23 +67,35 @@
   
   <xsl:template match="mei:category[parent::mei:taxonomy]">
     <fo:block>
-      <fo:block font-weight="bold" font-size="14pt" space-before="6pt">
+      <fo:block font-weight="bold" font-size="14pt" space-before="8pt" keep-with-next="always">
         <xsl:value-of select="mei:label[@xml:lang = $lang]"/>
       </fo:block>
-      <fo:block>
+      <fo:block keep-with-next="0.5">
         <xsl:apply-templates select="mei:desc[@xml:lang = $lang]"/>
+      </fo:block>
+      <fo:block>
         <xsl:apply-templates select="mei:category"/>
       </fo:block>
     </fo:block>
   </xsl:template>
   
   <xsl:template match="mei:category[parent::mei:category]">
-    <fo:block>
-      <fo:block font-weight="bold" font-size="12pt" space-before="6pt">
-        <xsl:value-of select="mei:label[@xml:lang = $lang]"/>
+    <xsl:variable name="nesting" select="count(ancestor-or-self::mei:category)"/>
+    <fo:block><!-- keep-together.within-page="{if($nesting = $levels) then 'always' else ($nesting div $levels)}" -->
+      <fo:list-block font-weight="bold" font-size="12pt" space-before="8pt" provisional-label-separation="5mm" provisional-distance-between-starts="{$levels}em" keep-with-next="always">
+        <fo:list-item>
+          <fo:list-item-label end-indent="label-end()">
+            <fo:block><xsl:number format="I.1" count="mei:category" level="multiple"/></fo:block>
+          </fo:list-item-label>
+          <fo:list-item-body start-indent="body-start()">
+            <fo:block><xsl:value-of select="mei:label[@xml:lang = $lang]"/></fo:block>
+          </fo:list-item-body>
+        </fo:list-item>
+      </fo:list-block>
+      <fo:block keep-with-next="0.5">
+        <xsl:apply-templates select="mei:desc[@xml:lang = $lang]"/>
       </fo:block>
       <fo:block>
-        <xsl:apply-templates select="mei:desc[@xml:lang = $lang]"/>
         <xsl:apply-templates select="mei:category"/>
       </fo:block>
     </fo:block>
