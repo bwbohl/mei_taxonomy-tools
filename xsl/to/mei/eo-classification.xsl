@@ -15,7 +15,7 @@
                 <xsl:element name="termList" namespace="http://www.music-encoding.org/ns/mei">
                     <xsl:attribute name="classcode">#ediromCategory</xsl:attribute>
                     <xsl:attribute name="xml:id" select="@xml:id" />
-                    <xsl:for-each select="//mei:category">
+                    <xsl:for-each select=".//mei:category">
                         <xsl:element name="term" namespace="http://www.music-encoding.org/ns/mei">
                             <xsl:attribute name="classcode">ediromCategory</xsl:attribute>
                             <xsl:attribute name="xml:id" select="@xml:id" />
