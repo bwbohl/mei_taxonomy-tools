@@ -101,7 +101,7 @@
     <xsl:result-document href="{$target.dir.path}bazga.annotation.category.css" format="text"><!--  format="no-xml-indent" -->
       <xsl:for-each select="//mei:category[@xml:id='bazga.annotation.category']//mei:category">
         <xsl:sort select="mei:label[@xml:lang='de']" data-type="text"/>
-        <xsl:variable name="key" select="@xml:id"/>
+        <xsl:variable name="key" select="xs:string(@xml:id)"/>
 
         <xsl:message select="$key"></xsl:message>
         
@@ -206,7 +206,7 @@
     <xsl:result-document href="{$target.dir.path}bazga.annotation.class.css" format="text"><!--  format="no-xml-indent" -->
       <xsl:for-each select="//mei:category[@xml:id='bazga.annotation.class']//mei:category">
         <xsl:sort select="mei:label[@xml:lang='de']" data-type="text"/>
-        <xsl:variable name="key" select="@xml:id"/>
+        <xsl:variable name="key" select="xs:string(@xml:id)"/>
         
         <xsl:message select="$key"></xsl:message>
         
