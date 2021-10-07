@@ -40,36 +40,7 @@
     </xsl:result-document>
     
     <xsl:result-document href="{$target.dir.path}categories_frameworkActions.xml" encoding="utf-8" format="{$saxon}">
-      <xsl:element name="serialized">
-        <xsl:attribute name="version">18.1</xsl:attribute>
-        <xsl:comment>please add @xml:space with ›preserve‹ as value to /serialized</xsl:comment>
-        <!--<xsl:attribute name="xml:space" namespace="http://www.w3.org/XML/1998/namespace">preserve</xsl:attribute>-->
-        <xsl:element name="serializableOrderedMap">
-          <xsl:element name="entry">
-            <xsl:element name="String">document-types</xsl:element>
-            <xsl:element name="documentTypeDescriptor-array">
-              <xsl:element name="documentTypeDescriptor">
-                <?TODO complete framework from ODD ?>
-                <xsl:comment>missing stuff</xsl:comment>
-                <xsl:element name="field">
-                  <xsl:attribute name="name">authorExtensionDescriptor</xsl:attribute>
-                  <xsl:element name="authorExtension">
-                    <xsl:comment> missing stuff</xsl:comment>
-                    <xsl:element name="field">
-                      <xsl:attribute name="name">actionDescriptors</xsl:attribute>
-                      <xsl:element name="action-array">
-                        <?TODO global actions ?>
-                        <!-- instrument association action -->
-                        <xsl:call-template name="bazga.kb.criticalNote.add.part"/>
-                      </xsl:element>
-                    </xsl:element>
-                  </xsl:element>
-                </xsl:element>
-              </xsl:element>
-            </xsl:element>
-          </xsl:element>
-        </xsl:element>
-      </xsl:element>
+      <xsl:call-template name="bazga.kb.criticalNote.add.part"/>
     </xsl:result-document>
     
     <xsl:result-document href="{$target.dir.path}categories.translation.xml" format="{$saxon}">
@@ -128,36 +99,7 @@
     </xsl:result-document>
     
     <xsl:result-document href="{$target.dir.path}classes_frameworkActions.xml" encoding="utf-8" format="{$saxon}">
-      <xsl:element name="serialized">
-        <xsl:attribute name="version">18.1</xsl:attribute>
-        <xsl:comment>please add @xml:space with ›preserve‹ as value to /serialized</xsl:comment>
-        <!--<xsl:attribute name="xml:space" namespace="http://www.w3.org/XML/1998/namespace">preserve</xsl:attribute>-->
-        <xsl:element name="serializableOrderedMap">
-          <xsl:element name="entry">
-            <xsl:element name="String">document-types</xsl:element>
-            <xsl:element name="documentTypeDescriptor-array">
-              <xsl:element name="documentTypeDescriptor">
-                <?TODO complete framework from ODD ?>
-                <xsl:comment>missing stuff</xsl:comment>
-                <xsl:element name="field">
-                  <xsl:attribute name="name">authorExtensionDescriptor</xsl:attribute>
-                  <xsl:element name="authorExtension">
-                    <xsl:comment> missing stuff</xsl:comment>
-                    <xsl:element name="field">
-                      <xsl:attribute name="name">actionDescriptors</xsl:attribute>
-                      <xsl:element name="action-array">
-                        <?TODO global actions ?>
-                        <!-- instrument association action -->
-                        <xsl:call-template name="bazga.kb.classes"/>
-                      </xsl:element>
-                    </xsl:element>
-                  </xsl:element>
-                </xsl:element>
-              </xsl:element>
-            </xsl:element>
-          </xsl:element>
-        </xsl:element>
-      </xsl:element>
+      <xsl:call-template name="bazga.kb.classes"/>
     </xsl:result-document>
     
     <xsl:result-document href="{$target.dir.path}classes.translation.xml" format="{$saxon}">
