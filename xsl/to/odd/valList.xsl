@@ -19,7 +19,7 @@
   <xsl:output name="he" media-type="text/xml" method="xml" indent="yes" />
   <xsl:output media-type="text/plain" method="text" normalization-form="NFC" name="text"/>
   <xsl:param name="target.dir.path">../../../build/</xsl:param>
-  <xsl:param name="saxon">pe</xsl:param>
+  <xsl:param name="saxon">he</xsl:param>
   
   <xsl:variable name="break">
     <xsl:text>&#xa;</xsl:text>
