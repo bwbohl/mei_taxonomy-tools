@@ -29,7 +29,7 @@
     <xsl:text>  </xsl:text>
   </xsl:variable>
   
-  <xsl:template match="/">
+  <xsl:template match="/" name="xsl:initial-template">
     
     <xsl:result-document encoding="utf-8" href="{$target.dir.path}bazga.annotation.category.odd" format="{$saxon}">
       <xsl:element name="valList" namespace="http://www.tei-c.org/ns/1.0">
