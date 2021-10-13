@@ -115,14 +115,7 @@
   </xd:doc>
   <xsl:template match="/">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
-      <fo:layout-master-set>
-        <fo:simple-page-master master-name="A4-portrait" size="210mm 297mm">
-          <fo:region-body margin="1in" column-count="2"/>
-        </fo:simple-page-master>
-        <fo:simple-page-master master-name="A3-landscape" size="landscape" page-height="297mm" page-width="420mm">
-          <fo:region-body margin="1in" column-count="2"/>
-        </fo:simple-page-master>
-      </fo:layout-master-set>
+      <xsl:call-template name="fo.layout-master-set" />
       <fo:page-sequence master-reference="A4-portrait">
         <fo:flow flow-name="xsl-region-body" font="12pt Times" line-height="20pt">
           <xsl:apply-templates/>
@@ -197,5 +190,21 @@
       </fo:block>
     </fo:block>
   </xsl:template>
-  
+  <xsl:template name="fo.layout-master-set">
+    <fo:layout-master-set>
+      <fo:simple-page-master master-name="A4-portrait-titlepage" page-width="210mm" page-height="297mm" margin="10mm 25mm 25mm 25mm">
+        <fo:region-body margin="10mm 0mm 10pt 0mm" column-count="1" />
+      </fo:simple-page-master>
+      <fo:simple-page-master master-name="A4-portrait" page-width="210mm" page-height="297mm" margin="10mm 25mm 25mm 25mm">
+        <fo:region-body margin="30mm 0mm 10pt 0mm" column-count="{$columns}" />
+        <fo:region-before extent="20mm" />
+        <fo:region-after extent="12pt" />
+      </fo:simple-page-master>
+      <fo:simple-page-master master-name="A3-landscape" size="landscape" page-height="297mm" page-width="420mm" margin="10mm 25mm 10mm 25mm">
+        <fo:region-body margin="30mm 0mm 30mm 0mm" column-count="1" />
+        <fo:region-before extent="20mm" />
+        <fo:region-after extent="10mm" />
+      </fo:simple-page-master>
+    </fo:layout-master-set>
+  </xsl:template>
 </xsl:stylesheet>
