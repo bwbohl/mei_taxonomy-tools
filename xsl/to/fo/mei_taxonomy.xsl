@@ -246,15 +246,6 @@
       </xsl:element>
     </xsl:if>
   </xsl:template>
-  <xd:doc scope="component">
-    <xd:desc>Wraps a submitted title string with an fo:block and title formats.</xd:desc>
-  </xd:doc>
-  <xsl:template name="title" as="item()*">
-    <xsl:param name="title" as="xs:string" required="yes" />
-    <fo:block font="24pt Times" line-height="40pt" font-weight="700" margin-bottom="24pt">
-      <xsl:value-of select="$title" />
-    </fo:block>
-  </xsl:template>
   <xsl:template name="pdf.bookmarks">
     <fo:bookmark-tree>
       <xsl:apply-templates select="mei:taxonomy" mode="bookmark" />
