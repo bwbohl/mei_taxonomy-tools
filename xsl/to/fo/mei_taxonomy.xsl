@@ -3,7 +3,7 @@
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p><xd:b>Created on:</xd:b> Apr 8, 2019</xd:p>
-      <xd:p><xd:b>Author:</xd:b> bwb</xd:p>
+      <xd:p><xd:b>Author:</xd:b> Benjamin W. Bohl</xd:p>
       <xd:p/>
     </xd:desc>
   </xd:doc>
