@@ -228,6 +228,33 @@
     <xsl:call-template name="examples" />
     <xsl:apply-templates select="mei:category" />
   </xsl:template>
+  <xsl:template name="examples">
+    <xsl:if test="mei:desc[@xml:lang = $lang][@type = 'example']">
+      <xsl:element name="fo:list-block" use-attribute-sets="text-margin examples-block">
+        <xsl:for-each select="mei:desc[@xml:lang = $lang][@type = 'example']">
+          <fo:list-item>
+            <fo:list-item-label end-indent="3em">
+              <fo:block>z.B.</fo:block>
+            </fo:list-item-label>
+            <fo:list-item-body start-indent="3em">
+              <fo:block>
+                <xsl:apply-templates />
+              </fo:block>
+            </fo:list-item-body>
+          </fo:list-item>
+        </xsl:for-each>
+      </xsl:element>
+    </xsl:if>
+  </xsl:template>
+  <xd:doc scope="component">
+    <xd:desc>Wraps a submitted title string with an fo:block and title formats.</xd:desc>
+  </xd:doc>
+  <xsl:template name="title" as="item()*">
+    <xsl:param name="title" as="xs:string" required="yes" />
+    <fo:block font="24pt Times" line-height="40pt" font-weight="700" margin-bottom="24pt">
+      <xsl:value-of select="$title" />
+    </fo:block>
+  </xsl:template>
   <xsl:template name="pdf.bookmarks">
     <fo:bookmark-tree>
       <xsl:apply-templates select="mei:taxonomy" mode="bookmark" />
