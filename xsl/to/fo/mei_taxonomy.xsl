@@ -106,6 +106,10 @@
   <xsl:template match="@xml:id">
     <xsl:attribute name="id" select="." />
   </xsl:template>
+  <xd:doc scope="component">
+    <xd:desc>Template to exclude certain attributes from making it to the output.</xd:desc>
+  </xd:doc>
+  <xsl:template match="@meiversion" />
   <xsl:template match="/">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
       <fo:layout-master-set>
