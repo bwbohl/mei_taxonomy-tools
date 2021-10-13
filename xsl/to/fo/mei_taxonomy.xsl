@@ -15,6 +15,89 @@
   
   <xsl:variable name="levels" select="max(for $i in //mei:category return count($i/ancestor-or-self::mei:category))"/>
   
+  <xsl:attribute-set name="title">
+    <xsl:attribute name="font-family">Futura</xsl:attribute>
+    <xsl:attribute name="font-size">24pt</xsl:attribute>
+    <xsl:attribute name="line-height">40pt</xsl:attribute>
+    <xsl:attribute name="font-weight">700</xsl:attribute>
+    <xsl:attribute name="space-after">24pt</xsl:attribute>
+    <xsl:attribute name="span">all</xsl:attribute>
+    <xsl:attribute name="provisional-distance-between-starts">24pt</xsl:attribute>
+    <xsl:attribute name="hyphenate">false</xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="h1">
+    <xsl:attribute name="font-family">Futura</xsl:attribute>
+    <xsl:attribute name="font-size">16pt</xsl:attribute>
+    <xsl:attribute name="line-height">27pt</xsl:attribute>
+    <xsl:attribute name="font-weight">500</xsl:attribute>
+    <xsl:attribute name="space-after">8pt</xsl:attribute>
+    <xsl:attribute name="space-before">16pt</xsl:attribute>
+    <xsl:attribute name="span">all</xsl:attribute>
+    <xsl:attribute name="provisional-distance-between-starts">24pt</xsl:attribute>
+  </xsl:attribute-set>
+  <!-- font-weight="bold" font-size="16pt" space-before="16pt" space-after="8pt" -->
+  <xsl:attribute-set name="h2">
+    <xsl:attribute name="font-family">Futura</xsl:attribute>
+    <xsl:attribute name="font-size">12pt</xsl:attribute>
+    <xsl:attribute name="line-height">16pt</xsl:attribute>
+    <xsl:attribute name="font-weight">500</xsl:attribute>
+    <xsl:attribute name="space-after">8pt</xsl:attribute>
+    <xsl:attribute name="space-before">16pt</xsl:attribute>
+    <xsl:attribute name="span">all</xsl:attribute>
+    <xsl:attribute name="provisional-distance-between-starts">24pt</xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="h3">
+    <xsl:attribute name="font-family">Futura</xsl:attribute>
+    <xsl:attribute name="font-size">12pt</xsl:attribute>
+    <xsl:attribute name="line-height">16pt</xsl:attribute>
+    <xsl:attribute name="font-weight">400</xsl:attribute>
+    <xsl:attribute name="font-style">italic</xsl:attribute>
+    <xsl:attribute name="space-after">8pt</xsl:attribute>
+    <xsl:attribute name="space-before">8pt</xsl:attribute>
+    <xsl:attribute name="span">all</xsl:attribute>
+    <xsl:attribute name="provisional-distance-between-starts">24pt</xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="flow-defaults">
+    <xsl:attribute name="font-size">12pt</xsl:attribute>
+    <xsl:attribute name="line-height">20pt</xsl:attribute>
+    <xsl:attribute name="font-weight">400</xsl:attribute>
+    <xsl:attribute name="font-style">normal</xsl:attribute>
+    <xsl:attribute name="text-align">justify</xsl:attribute>
+    <xsl:attribute name="provisional-distance-between-starts">24pt</xsl:attribute>
+    <xsl:attribute name="hyphenate">true</xsl:attribute>
+    <xsl:attribute name="xml:lang" select="$lang" />
+  </xsl:attribute-set>
+  <xsl:attribute-set name="text-flow">
+    <xsl:attribute name="font-size">12pt</xsl:attribute>
+    <xsl:attribute name="line-height">16pt</xsl:attribute>
+    <xsl:attribute name="font-weight">400</xsl:attribute>
+    <xsl:attribute name="font-style">normal</xsl:attribute>
+    <xsl:attribute name="space-after">8pt</xsl:attribute>
+    <xsl:attribute name="space-before">8pt</xsl:attribute>
+    <xsl:attribute name="text-align">justify</xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="text-margin">
+    <xsl:attribute name="font-size">10pt</xsl:attribute>
+    <xsl:attribute name="line-height">13pt</xsl:attribute>
+    <xsl:attribute name="font-weight">300</xsl:attribute>
+    <xsl:attribute name="font-style">normal</xsl:attribute>
+    <xsl:attribute name="space-after">0pt</xsl:attribute>
+    <xsl:attribute name="space-before">0pt</xsl:attribute>
+    <xsl:attribute name="text-align">justify</xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="examples-block">
+    <xsl:attribute name="start-indent">1em</xsl:attribute>
+    <xsl:attribute name="end-indent">1em</xsl:attribute>
+    <xsl:attribute name="space-after">1em</xsl:attribute>
+    <xsl:attribute name="space-before">1em</xsl:attribute>
+    <xsl:attribute name="border">1px solid #999999</xsl:attribute>
+    <xsl:attribute name="padding">4pt</xsl:attribute>
+    <xsl:attribute name="background-color">#eeeeee</xsl:attribute>
+    <xsl:attribute name="color">#333333</xsl:attribute>
+  </xsl:attribute-set>
+  <xd:doc scope="component">
+    <xd:desc>This template avoids processing of elements that do not have the selected language.</xd:desc>
+  </xd:doc>
   <xsl:template match="*[@xml:lang != $lang]"/> 
   
   <xsl:template match="/">
