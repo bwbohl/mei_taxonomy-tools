@@ -160,20 +160,40 @@
     <xsl:apply-templates select="mei:category" />
   </xsl:template>
   
+  <xd:doc scope="component">
+    <xd:desc>Template for top-level mei:category elements.</xd:desc>
+  </xd:doc>
   <xsl:template match="mei:category[parent::mei:taxonomy]">
-    <fo:block>
-      <fo:block font-weight="bold" font-size="14pt" space-before="8pt" keep-with-next="always">
-        <xsl:value-of select="mei:label[@xml:lang = $lang]"/>
-      </fo:block>
-      <fo:block keep-with-next="0.5">
-        <xsl:apply-templates select="mei:desc[@xml:lang = $lang]"/>
-      </fo:block>
-      <fo:block>
-        <xsl:apply-templates select="mei:category"/>
-      </fo:block>
+    <xsl:variable name="number">
+      <xsl:number format="I.1" count="mei:category" level="multiple" />
+    </xsl:variable>
+    <xsl:variable name="label" select="mei:label[@xml:lang = $lang]" />
+    <fo:block id="{@xml:id}" page-break-before="always" span="all">
+      <fo:marker marker-class-name="top-category">
+        <xsl:value-of select="$number, $label" separator=" " />
+      </fo:marker>
+      <xsl:element name="fo:block" use-attribute-sets="h1">
+        <fo:list-block>
+          <fo:list-item>
+            <fo:list-item-label end-indent="label-end()">
+              <fo:block>
+                <xsl:value-of select="$number" />
+              </fo:block>
+            </fo:list-item-label>
+            <fo:list-item-body start-indent="body-start()">
+              <fo:block>
+                <xsl:value-of select="$label" />
+              </fo:block>
+            </fo:list-item-body>
+          </fo:list-item>
+        </fo:list-block>
+      </xsl:element>
     </fo:block>
+    <fo:block keep-with-next="0.5" text-align="justify">
+      <xsl:apply-templates select="mei:desc[@xml:lang = $lang]" />
+    </fo:block>
+    <xsl:apply-templates select="mei:category" />
   </xsl:template>
-  
   <xsl:template match="mei:category[parent::mei:category]">
     <xsl:variable name="nesting" select="count(ancestor-or-self::mei:category)"/>
     <fo:block><!-- keep-together.within-page="{if($nesting = $levels) then 'always' else ($nesting div $levels)}" -->
