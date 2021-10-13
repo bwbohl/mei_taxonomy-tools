@@ -143,17 +143,21 @@
       </fo:page-sequence>
     </fo:root>
   </xsl:template>
-  
+  <xd:doc scope="component">
+    <xd:desc>Process tei:taxonomy element</xd:desc>
+  </xd:doc>
   <xsl:template match="mei:taxonomy">
-    <fo:block>
-      <fo:block font-weight="bold" font-size="16pt" space-before="16pt" space-after="8pt" span="all">
-        <xsl:value-of select="mei:head[@xml:lang = $lang]"/>
-      </fo:block>
-      <fo:block>
-        <xsl:apply-templates select="mei:desc[@xml:lang = $lang]"/>
-        <xsl:apply-templates select="mei:category"/>
-      </fo:block>
-    </fo:block>
+    <fo:marker marker-class-name="document-title">
+      <xsl:value-of select="mei:head[@xml:lang = $lang]" />
+      </fo:marker>
+  <xsl:element name="fo:block" use-attribute-sets="h1">
+      <xsl:apply-templates select="@*" />
+      <xsl:value-of select="mei:head[@xml:lang = $lang]" />
+    </xsl:element>
+    <xsl:element name="fo:block" use-attribute-sets="text-flow">
+      <xsl:apply-templates select="mei:desc[@xml:lang = $lang]" />
+    </xsl:element>
+    <xsl:apply-templates select="mei:category" />
   </xsl:template>
   
   <xsl:template match="mei:category[parent::mei:taxonomy]">
