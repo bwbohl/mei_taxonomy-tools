@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:mei="http://www.music-encoding.org/ns/mei" exclude-result-prefixes="xs xd" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:mei="http://www.music-encoding.org/ns/mei" exclude-result-prefixes="mei xd xs xsl" version="2.0">
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p><xd:b>Created on:</xd:b> Apr 8, 2019</xd:p>
