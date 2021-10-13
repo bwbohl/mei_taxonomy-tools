@@ -116,6 +116,7 @@
   <xsl:template match="/">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
       <xsl:call-template name="fo.layout-master-set" />
+      <xsl:call-template name="pdf.bookmarks" />
       <fo:page-sequence master-reference="A4-portrait">
         <fo:flow flow-name="xsl-region-body" font="12pt Times" line-height="20pt">
           <xsl:apply-templates/>
@@ -189,6 +190,27 @@
         <xsl:apply-templates select="mei:category"/>
       </fo:block>
     </fo:block>
+  </xsl:template>
+  <xsl:template name="pdf.bookmarks">
+    <fo:bookmark-tree>
+      <xsl:apply-templates select="mei:taxonomy" mode="bookmark" />
+    </fo:bookmark-tree>
+  </xsl:template>
+  <xsl:template match="mei:taxonomy" mode="bookmark">
+    <fo:bookmark internal-destination="{@xml:id}">
+      <fo:bookmark-title>
+        <xsl:value-of select="mei:head[@xml:lang = $lang]" />
+      </fo:bookmark-title>
+      <xsl:apply-templates select="mei:category" mode="bookmark" />
+    </fo:bookmark>
+  </xsl:template>
+  <xsl:template match="mei:category" mode="bookmark">
+    <fo:bookmark internal-destination="{@xml:id}">
+      <fo:bookmark-title>
+        <xsl:value-of select="mei:label[@xml:lang = $lang]" />
+      </fo:bookmark-title>
+      <xsl:apply-templates select="mei:category" mode="bookmark" />
+    </fo:bookmark>
   </xsl:template>
   <xsl:template name="fo.layout-master-set">
     <fo:layout-master-set>
