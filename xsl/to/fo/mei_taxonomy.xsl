@@ -117,27 +117,65 @@
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
       <xsl:call-template name="fo.layout-master-set" />
       <xsl:call-template name="pdf.bookmarks" />
-      <fo:page-sequence master-reference="A4-portrait">
-        <fo:flow flow-name="xsl-region-body" font="12pt Times" line-height="20pt">
-          <xsl:apply-templates/>
-          <!--<fo:block font="italic 14pt Helvetica">
-            <fo:inline color="red">Hello</fo:inline> <fo:inline color="blue">World</fo:inline></fo:block>
-          <fo:block> Attributes: <fo:inline color="green">colored</fo:inline>, <fo:inline
-            font-weight="bold">bold</fo:inline>, <fo:inline font-style="italic"
-              >italic</fo:inline>, <fo:inline font-size="75%">small</fo:inline>, <fo:inline
-                font-size="133%">large</fo:inline>. </fo:block>
-          <fo:block> Text attributes: <fo:inline text-decoration="underline"
-            >underlined</fo:inline>, <fo:inline text-transform="uppercase">all capitals</fo:inline>,
-            <fo:inline text-transform="capitalize">capitalized</fo:inline>, text with
-            <fo:inline baseline-shift="sub" font-size="smaller">subscripts</fo:inline> and
-            <fo:inline baseline-shift="super" font-size="smaller">superscripts</fo:inline>.
-          </fo:block>-->
-        </fo:flow>
+      <fo:page-sequence master-reference="A4-portrait-titlepage">
+        <xsl:element name="fo:flow" use-attribute-sets="flow-defaults">
+          <xsl:attribute name="flow-name">xsl-region-body</xsl:attribute>
+          <xsl:element name="fo:block" use-attribute-sets="title">
+            <xsl:value-of select="mei:taxonomy/mei:head[@xml:lang = $lang]" />
+          </xsl:element>
+        <xsl:element name="fo:block" use-attribute-sets="text-flow">
+            <xsl:value-of select="format-date(current-date(), '[D]. [Mn] [Y]')" />
+          </xsl:element>
+        </xsl:element>
       </fo:page-sequence>
-      <fo:page-sequence master-reference="A3-landscape">
+      <fo:page-sequence master-reference="A4-portrait">
+        <fo:static-content flow-name="xsl-region-before">
+          <xsl:element name="fo:block" use-attribute-sets="text-margin">
+            <fo:retrieve-marker retrieve-class-name="document-title" retrieve-position="first-including-carryover" retrieve-boundary="page-sequence" />
+          </xsl:element>
+        <fo:block text-align="right" font-size="10pt">
+            <fo:retrieve-marker retrieve-class-name="top-category" retrieve-position="last-ending-within-page" retrieve-boundary="page-sequence" />
+            <xsl:text>: </xsl:text>
+            <fo:retrieve-marker retrieve-class-name="category" retrieve-position="first-including-carryover" retrieve-boundary="page-sequence" />
+            <xsl:text> – </xsl:text>
+            <fo:retrieve-marker retrieve-class-name="category" retrieve-position="last-ending-within-page" retrieve-boundary="page-sequence" />
+          </fo:block>
+          <fo:block>
+            <fo:leader leader-alignment="page" leader-length="100%" leader-pattern="rule" />
+          </fo:block>
+        </fo:static-content>
+      <fo:static-content flow-name="xsl-region-after">
+          <fo:block text-align="center">
+            <fo:page-number />
+          </fo:block>
+        </fo:static-content>
+        <xsl:element name="fo:flow" use-attribute-sets="flow-defaults">
+          <xsl:attribute name="flow-name">xsl-region-body</xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:element>
+      </fo:page-sequence>
+    <fo:page-sequence master-reference="A3-landscape">
+        <fo:static-content flow-name="xsl-region-before">
+          <fo:block text-align="left" font-size="10pt">
+            <xsl:value-of select="/mei:taxonomy/mei:head[@xml:lang = $lang]" />
+          </fo:block>
+          <fo:block text-align="right" font-size="10pt">
+            <fo:retrieve-marker retrieve-class-name="top-category" retrieve-position="last-ending-within-page" retrieve-boundary="page-sequence" />
+            <xsl:text> – </xsl:text>
+            <fo:retrieve-marker retrieve-class-name="category" retrieve-position="last-ending-within-page" retrieve-boundary="page-sequence" />
+          </fo:block>
+          <fo:block>
+            <fo:leader leader-alignment="page" leader-length="100%" leader-pattern="rule" />
+          </fo:block>
+        </fo:static-content>
+        <fo:static-content flow-name="xsl-region-after">
+          <fo:block text-align="center">
+            <fo:page-number />
+          </fo:block>
+        </fo:static-content>
         <fo:flow flow-name="xsl-region-body">
           <fo:block break-before="page" span="all">
-            <fo:external-graphic src="{$image-url}" max-width="80%" max-height="80%" scaling="uniform" content-height="scale-to-fit" margin-left="auto" margin-right="auto"/>
+            <fo:external-graphic src="{$image-url}" max-width="80%" max-height="80%" scaling="uniform" content-height="scale-to-fit" margin-left="auto" margin-right="auto" />
           </fo:block>
         </fo:flow>
       </fo:page-sequence>
