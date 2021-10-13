@@ -7,7 +7,7 @@
       <xd:p/>
     </xd:desc>
   </xd:doc>
-  <xsl:output indent="yes"/>
+  <xsl:output indent="yes" method="xml" />
   
   <xsl:param name="lang">de</xsl:param>
   <xsl:param name="image-url"></xsl:param>
