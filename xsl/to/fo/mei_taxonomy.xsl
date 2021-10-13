@@ -100,6 +100,12 @@
   </xd:doc>
   <xsl:template match="*[@xml:lang != $lang]"/> 
   
+  <xd:doc scope="component">
+    <xd:desc>Template reassuring source xml:id attributes are being replicated in the target xsl-fo.</xd:desc>
+  </xd:doc>
+  <xsl:template match="@xml:id">
+    <xsl:attribute name="id" select="." />
+  </xsl:template>
   <xsl:template match="/">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
       <fo:layout-master-set>
