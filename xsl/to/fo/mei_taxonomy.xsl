@@ -110,6 +110,9 @@
     <xd:desc>Template to exclude certain attributes from making it to the output.</xd:desc>
   </xd:doc>
   <xsl:template match="@meiversion" />
+  <xd:doc scope="component">
+    <xd:desc>The root template returns the basic xsl-fo structures.</xd:desc>
+  </xd:doc>
   <xsl:template match="/">
     <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
       <fo:layout-master-set>
