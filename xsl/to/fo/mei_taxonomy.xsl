@@ -10,6 +10,7 @@
   <xsl:output indent="yes" method="xml" />
   
   <xsl:param name="lang">de</xsl:param>
+  <xsl:param name="columns">1</xsl:param>
   <xsl:param name="image-url"></xsl:param>
   
   <xsl:variable name="levels" select="max(for $i in //mei:category return count($i/ancestor-or-self::mei:category))"/>
