@@ -276,7 +276,7 @@
                     <xsl:text>fragment</xsl:text>
                   </xsl:element>
                   <xsl:element name="String">
-                    <xsl:text>&lt;part key="</xsl:text>
+                    <xsl:text>&lt;categoryRef key="</xsl:text>
                     <!--<xsl:value-of select="$key"/>-->
                     <xsl:call-template name="create.ask.part_key-value"/>
                     <xsl:text>" xmlns="http://zimmermann-gesamtausgabe.de/ns/kb"/&gt;</xsl:text><!--  count="" pname=""  -->
