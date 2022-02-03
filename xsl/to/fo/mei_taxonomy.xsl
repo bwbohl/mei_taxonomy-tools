@@ -12,11 +12,12 @@
   <xsl:param name="lang">de</xsl:param>
   <xsl:param name="columns">1</xsl:param>
   <xsl:param name="image-url"></xsl:param>
+    <xsl:param name="font-family"></xsl:param>
   
   <xsl:variable name="levels" select="max(for $i in //mei:category return count($i/ancestor-or-self::mei:category))"/>
   
   <xsl:attribute-set name="title">
-    <xsl:attribute name="font-family">Futura</xsl:attribute>
+    <xsl:attribute name="font-family"><xsl:value-of select="$font-family"/></xsl:attribute>
     <xsl:attribute name="font-size">24pt</xsl:attribute>
     <xsl:attribute name="line-height">40pt</xsl:attribute>
     <xsl:attribute name="font-weight">700</xsl:attribute>
@@ -26,7 +27,7 @@
     <xsl:attribute name="hyphenate">false</xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="h1">
-    <xsl:attribute name="font-family">Futura</xsl:attribute>
+      <xsl:attribute name="font-family"><xsl:value-of select="$font-family"/></xsl:attribute>
     <xsl:attribute name="font-size">16pt</xsl:attribute>
     <xsl:attribute name="line-height">27pt</xsl:attribute>
     <xsl:attribute name="font-weight">500</xsl:attribute>
@@ -37,7 +38,7 @@
   </xsl:attribute-set>
   <!-- font-weight="bold" font-size="16pt" space-before="16pt" space-after="8pt" -->
   <xsl:attribute-set name="h2">
-    <xsl:attribute name="font-family">Futura</xsl:attribute>
+      <xsl:attribute name="font-family"><xsl:value-of select="$font-family"/></xsl:attribute>
     <xsl:attribute name="font-size">12pt</xsl:attribute>
     <xsl:attribute name="line-height">16pt</xsl:attribute>
     <xsl:attribute name="font-weight">500</xsl:attribute>
@@ -47,7 +48,7 @@
     <xsl:attribute name="provisional-distance-between-starts">24pt</xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="h3">
-    <xsl:attribute name="font-family">Futura</xsl:attribute>
+      <xsl:attribute name="font-family"><xsl:value-of select="$font-family"/></xsl:attribute>
     <xsl:attribute name="font-size">12pt</xsl:attribute>
     <xsl:attribute name="line-height">16pt</xsl:attribute>
     <xsl:attribute name="font-weight">400</xsl:attribute>
@@ -58,6 +59,7 @@
     <xsl:attribute name="provisional-distance-between-starts">24pt</xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="flow-defaults">
+      <xsl:attribute name="font-family"><xsl:value-of select="$font-family"/></xsl:attribute>
     <xsl:attribute name="font-size">12pt</xsl:attribute>
     <xsl:attribute name="line-height">20pt</xsl:attribute>
     <xsl:attribute name="font-weight">400</xsl:attribute>
@@ -68,6 +70,7 @@
     <xsl:attribute name="xml:lang" select="$lang" />
   </xsl:attribute-set>
   <xsl:attribute-set name="text-flow">
+      <xsl:attribute name="font-family"><xsl:value-of select="$font-family"/></xsl:attribute>
     <xsl:attribute name="font-size">12pt</xsl:attribute>
     <xsl:attribute name="line-height">16pt</xsl:attribute>
     <xsl:attribute name="font-weight">400</xsl:attribute>
@@ -77,6 +80,7 @@
     <xsl:attribute name="text-align">justify</xsl:attribute>
   </xsl:attribute-set>
   <xsl:attribute-set name="text-margin">
+      <xsl:attribute name="font-family"><xsl:value-of select="$font-family"/></xsl:attribute>
     <xsl:attribute name="font-size">10pt</xsl:attribute>
     <xsl:attribute name="line-height">13pt</xsl:attribute>
     <xsl:attribute name="font-weight">300</xsl:attribute>
@@ -114,7 +118,7 @@
     <xd:desc>The root template returns the basic xsl-fo structures.</xd:desc>
   </xd:doc>
   <xsl:template match="/">
-    <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+      <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="{$font-family}">
       <xsl:call-template name="fo.layout-master-set" />
       <xsl:call-template name="pdf.bookmarks" />
       <fo:page-sequence master-reference="A4-portrait-titlepage">
