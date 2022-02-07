@@ -118,7 +118,7 @@
     <xd:desc>The root template returns the basic xsl-fo structures.</xd:desc>
   </xd:doc>
   <xsl:template match="/">
-      <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="{$font-family}" xml:lang="{$lang}">
+      <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:fox="http://xmlgraphics.apache.org/fop/extensions" font-family="{$font-family}" xml:lang="{$lang}">
       <xsl:call-template name="fo.layout-master-set" />
       <xsl:call-template name="pdf.bookmarks" />
       <fo:page-sequence master-reference="A4-portrait-titlepage">
