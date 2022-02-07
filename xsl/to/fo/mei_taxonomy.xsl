@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:mei="http://www.music-encoding.org/ns/mei" exclude-result-prefixes="mei xd xs xsl" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:fox="http://xmlgraphics.apache.org/fop/extensions" xmlns:mei="http://www.music-encoding.org/ns/mei" exclude-result-prefixes="mei xd xs xsl" version="2.0">
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p><xd:b>Created on:</xd:b> Apr 8, 2019</xd:p>
@@ -178,8 +178,12 @@
           </fo:block>
         </fo:static-content>
         <fo:flow flow-name="xsl-region-body">
+            <fo:marker marker-class-name="category">Appendix: Taxonomy Graph</fo:marker>
+            <xsl:element name="fo:block" use-attribute-sets="h1">
+                Appendix: Taxonomy Graph
+            </xsl:element>
           <fo:block break-before="page" span="all">
-            <fo:external-graphic src="{$image-url}" max-width="80%" max-height="80%" scaling="uniform" content-height="scale-to-fit" margin-left="auto" margin-right="auto" />
+            <fo:external-graphic src="{$image-url}" max-width="80%" max-height="80%" scaling="uniform" content-height="scale-to-fit" content-type="content-type:image/jpg" fox:alt-text="Taxonomy graph" />
           </fo:block>
         </fo:flow>
       </fo:page-sequence>
