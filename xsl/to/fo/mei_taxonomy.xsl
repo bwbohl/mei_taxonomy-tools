@@ -233,9 +233,9 @@
             <fo:marker marker-class-name="top-category">
                 <xsl:value-of select="$number, $label" separator=" " />
             </fo:marker>
-            <xsl:element name="fo:block" use-attribute-sets="h1">
+            <xsl:element name="fo:block">
                 <fo:list-block>
-                    <fo:list-item>
+                    <xsl:element name="fo:list-item" use-attribute-sets="h1">
                         <fo:list-item-label end-indent="label-end()">
                             <fo:block>
                                 <xsl:value-of select="$number" />
@@ -244,6 +244,18 @@
                         <fo:list-item-body start-indent="body-start()">
                             <fo:block>
                                 <xsl:value-of select="$label" />
+                            </fo:block>
+                        </fo:list-item-body>
+                    </xsl:element>
+                    <fo:list-item font-style="italic" color="gray">
+                        <fo:list-item-label end-indent="label-end()">
+                            <fo:block>
+                                <xsl:text>ID</xsl:text>
+                            </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="body-start()">
+                            <fo:block text-align="justify" hyphenate="true" language="{$lang}" hyphenation-remain-character-count="2">
+                                <xsl:value-of select="@xml:id" />
                             </fo:block>
                         </fo:list-item-body>
                     </fo:list-item>
@@ -257,7 +269,7 @@
     </xsl:template>
     <xsl:template match="mei:category[parent::mei:category]">
         <xsl:variable name="nesting" select="count(ancestor-or-self::mei:category)" />
-        <fo:block id="{@xml:id}">
+        <fo:block id="{@xml:id}" space-before="10mm" space-before.conditionality="discard" keep-with-next.within-page="always" keep-with-next="always">
             <!-- keep-together.within-page="{if($nesting = $levels) then 'always' else ($nesting div $levels)}" -->
             <xsl:variable name="number">
                 <xsl:number format="I.1" count="mei:category" level="multiple" />
@@ -265,26 +277,40 @@
             <xsl:variable name="label">
                 <xsl:value-of select="mei:label[@xml:lang = $lang]" />
             </xsl:variable>
-            <fo:list-block font-weight="bold" font-size="12pt" space-before="8pt" provisional-label-separation="5mm" provisional-distance-between-starts="{$levels}em" keep-with-next="always">
-                <fo:list-item>
-                    <fo:marker marker-class-name="category">
-                        <xsl:value-of select="$number, $label" separator=" " />
-                    </fo:marker>
-                    <fo:list-item-label end-indent="label-end()">
-                        <fo:block>
-                            <xsl:value-of select="$number" />
-                        </fo:block>
-                    </fo:list-item-label>
-                    <fo:list-item-body start-indent="body-start()">
-                        <fo:block text-align="justify" hyphenate="true" language="{$lang}" hyphenation-remain-character-count="2">
-                            <xsl:value-of select="$label" />
-                        </fo:block>
-                    </fo:list-item-body>
-                </fo:list-item>
-            </fo:list-block>
-        </fo:block>
-        <fo:block keep-with-next="0.5" text-align="justify">
-            <xsl:apply-templates select="mei:desc[@xml:lang = $lang][not(@type = 'example')]" />
+            <fo:block keep-together="always">
+                <fo:list-block provisional-label-separation="5mm" provisional-distance-between-starts="{$levels}em" keep-with-next="always">
+                    <fo:list-item font-weight="bold" font-size="12pt" space-before="8pt">
+                        <fo:marker marker-class-name="category">
+                            <xsl:value-of select="$number, $label" separator=" " />
+                        </fo:marker>
+                        <fo:list-item-label end-indent="label-end()">
+                            <fo:block>
+                                <xsl:value-of select="$number" />
+                            </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="body-start()">
+                            <fo:block text-align="justify" hyphenate="true" language="{$lang}" hyphenation-remain-character-count="2">
+                                <xsl:value-of select="$label" />
+                            </fo:block>
+                        </fo:list-item-body>
+                    </fo:list-item>
+                    <fo:list-item font-style="italic" color="gray">
+                        <fo:list-item-label end-indent="label-end()">
+                            <fo:block>
+                                <xsl:text>ID</xsl:text>
+                            </fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="body-start()">
+                            <fo:block text-align="justify" hyphenate="true" language="{$lang}" hyphenation-remain-character-count="2">
+                                <xsl:value-of select="@xml:id" />
+                            </fo:block>
+                        </fo:list-item-body>
+                    </fo:list-item>
+                </fo:list-block>
+            </fo:block>
+            <fo:block keep-with-previous="always" keep-with-previous.within-page="always" text-align="justify">
+                <xsl:apply-templates select="mei:desc[@xml:lang = $lang][not(@type = 'example')]" />
+            </fo:block>
         </fo:block>
         <xsl:call-template name="examples" />
         <xsl:apply-templates select="mei:category" />
