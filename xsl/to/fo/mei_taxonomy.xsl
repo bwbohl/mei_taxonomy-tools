@@ -180,11 +180,14 @@
         <fo:flow flow-name="xsl-region-body">
             <fo:marker marker-class-name="category">Appendix: Taxonomy Graph</fo:marker>
             <xsl:element name="fo:block" use-attribute-sets="h1">
-                Appendix: Taxonomy Graph
+                <xsl:attribute name="break-before">page</xsl:attribute>
+                <xsl:attribute name="span">all</xsl:attribute>
+                <xsl:attribute name="id">appendix_taxonomyGraph</xsl:attribute>
+                <xsl:text>Appendix: Taxonomy Graph</xsl:text>
+                <fo:block>
+                    <fo:external-graphic src="{$image-url}" max-width="80%" max-height="80%" scaling="uniform" content-height="scale-to-fit" content-type="content-type:image/jpg" fox:alt-text="Taxonomy graph" />
+                </fo:block>
             </xsl:element>
-          <fo:block break-before="page" span="all">
-            <fo:external-graphic src="{$image-url}" max-width="80%" max-height="80%" scaling="uniform" content-height="scale-to-fit" content-type="content-type:image/jpg" fox:alt-text="Taxonomy graph" />
-          </fo:block>
         </fo:flow>
       </fo:page-sequence>
     </fo:root>
@@ -295,6 +298,12 @@
   <xsl:template name="pdf.bookmarks">
     <fo:bookmark-tree>
       <xsl:apply-templates select="mei:taxonomy" mode="bookmark" />
+        <fo:bookmark internal-destination="appendix_taxonomyGraph">
+            <fo:bookmark-title>
+                <xsl:text>Appendix: Taxonomy Graph</xsl:text>
+            </fo:bookmark-title>
+            <xsl:apply-templates select="mei:category" mode="bookmark" />
+        </fo:bookmark>
     </fo:bookmark-tree>
   </xsl:template>
   <xsl:template match="mei:taxonomy" mode="bookmark">
