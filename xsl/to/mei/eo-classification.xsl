@@ -9,7 +9,7 @@
     </xd:doc>
     <xsl:output method="xml" indent="yes"/>
     <xsl:template match="/">
-        <xsl:element name="clasisification" namespace="http://www.music-encoding.org/ns/mei">
+        <xsl:element name="classification" namespace="http://www.music-encoding.org/ns/mei">
             <xsl:attribute name="xml:id" select="/mei:taxonomy/@xml:id"></xsl:attribute>
             <xsl:for-each select="/mei:taxonomy/mei:category">
                 <xsl:element name="termList" namespace="http://www.music-encoding.org/ns/mei">
@@ -17,7 +17,7 @@
                     <xsl:attribute name="xml:id" select="@xml:id" />
                     <xsl:for-each select=".//mei:category">
                         <xsl:element name="term" namespace="http://www.music-encoding.org/ns/mei">
-                            <xsl:attribute name="classcode">ediromCategory</xsl:attribute>
+                            <xsl:attribute name="classcode">#ediromCategory</xsl:attribute>
                             <xsl:attribute name="xml:id" select="@xml:id" />
                             <xsl:for-each select="mei:label">
                                 <xsl:element name="name" namespace="http://www.music-encoding.org/ns/mei">
